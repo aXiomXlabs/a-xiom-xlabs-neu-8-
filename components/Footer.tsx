@@ -71,7 +71,7 @@ export default function Footer() {
             <div className="flex flex-wrap justify-center lg:justify-end gap-5">
               {/* Telegram */}
               <SocialLink
-                href="https://t.me/Rust_Rocket"
+                href="https://t.me/ax_rustrocket"
                 label="Telegram Channel"
                 id="footer-telegram-link"
                 trackingId="footer_telegram_click"
@@ -174,7 +174,7 @@ export default function Footer() {
               name: "Rust Rocket",
               url: "https://www.rust-rocket.com",
               logo: "https://www.rust-rocket.com/images/rust-rocket-logo.png",
-              sameAs: ["https://x.com/rustrocket", "https://t.me/Rust_Rocket", "https://discord.gg/rustrocket"],
+              sameAs: ["https://x.com/rustrocket", "https://t.me/ax_rustrocket", "https://discord.gg/rustrocket"],
             }),
           }}
         />
