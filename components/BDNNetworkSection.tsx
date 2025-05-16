@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react"
 import { Zap, Globe, Server, Network } from "lucide-react"
 import { motion, useInView } from "framer-motion"
 import Tooltip from "./Tooltip"
+import CollapsibleSection from "./CollapsibleSection"
 
 // Define gateway nodes with city names and coordinates
 const gatewayNodes = [
@@ -286,29 +287,30 @@ export default function BDNNetworkSection() {
   return (
     <section ref={sectionRef} className="py-24 relative overflow-hidden" id="bdn-network">
       <div className="container-custom">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.5 }}
-          className="text-center max-w-4xl mx-auto mb-16"
+        <CollapsibleSection
+          title={
+            <>
+              <div className="inline-flex items-center px-4 py-2 rounded-full bg-background-tertiary text-text-secondary text-sm font-medium mb-4">
+                <span className="w-2 h-2 rounded-full bg-primary mr-2"></span>
+                BDN Network
+              </div>
+
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-text-primary">
+                Outpace the Market: Same-Block Execution via Our Exclusive{" "}
+                <Tooltip text="Block Dependent Network - A specialized network for fastest transaction execution">
+                  <span className="text-gradient cursor-help">BDN Network</span>
+                </Tooltip>
+              </h2>
+            </>
+          }
+          defaultOpen={false}
+          titleClassName="hover:opacity-90 transition-opacity duration-300 flex flex-col items-center text-center"
         >
-          <div className="inline-flex items-center px-4 py-2 rounded-full bg-background-tertiary text-text-secondary text-sm font-medium mb-4">
-            <span className="w-2 h-2 rounded-full bg-primary mr-2"></span>
-            BDN Network
-          </div>
-
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-text-primary">
-            Outpace the Market: Same-Block Execution via Our Exclusive{" "}
-            <Tooltip text="Block Dependent Network - A specialized network for fastest transaction execution">
-              <span className="text-gradient cursor-help">BDN Network</span>
-            </Tooltip>
-          </h2>
-
           <p className="text-text-secondary text-lg">
             Our global network of 15 private, optimized Solana gateways ensures that your transactions are routed
             through the fastest and most reliable paths.
           </p>
-        </motion.div>
+        </CollapsibleSection>
 
         <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
           {/* Same-Block Execution */}
@@ -318,37 +320,43 @@ export default function BDNNetworkSection() {
             transition={{ duration: 0.6 }}
             className="glass-card p-8 border-primary/20 hover:border-primary/40 transition-all duration-300 hover:shadow-glow"
           >
-            <div className="flex items-start gap-4 mb-4">
-              <div className="p-3 rounded-lg bg-primary/10 text-primary">
-                <Zap className="h-6 w-6" />
-              </div>
-              <h3 className="text-2xl font-bold text-text-primary">
-                <Tooltip text="Execution in the same Solana block as the original event">
-                  <span className="cursor-help">Same-Block Execution: Maximum Impact.</span>
-                </Tooltip>
-              </h3>
-            </div>
-            <p className="text-text-secondary text-lg">
-              Rust Rocket aims to execute your sniper and copy trades in the{" "}
-              <span className="text-primary font-semibold">exact same Solana block</span> as the original event. No
-              waiting, no delays, maximum success rate.
-            </p>
+            <CollapsibleSection
+              title={
+                <div className="flex items-start gap-4 mb-4">
+                  <div className="p-3 rounded-lg bg-primary/10 text-primary">
+                    <Zap className="h-6 w-6" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-text-primary">
+                    <Tooltip text="Execution in the same Solana block as the original event">
+                      <span className="cursor-help">Same-Block Execution: Maximum Impact.</span>
+                    </Tooltip>
+                  </h3>
+                </div>
+              }
+              titleClassName="hover:opacity-90 transition-opacity duration-300"
+            >
+              <p className="text-text-secondary text-lg">
+                Rust Rocket aims to execute your sniper and copy trades in the{" "}
+                <span className="text-primary font-semibold">exact same Solana block</span> as the original event. No
+                waiting, no delays, maximum success rate.
+              </p>
 
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-4 mt-6">
-              <div className="text-center">
-                <div className="text-2xl font-bold text-primary mb-1">0.4s</div>
-                <div className="text-xs text-text-secondary">Average Execution</div>
+              {/* Stats */}
+              <div className="grid grid-cols-3 gap-4 mt-6">
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-primary mb-1">0.4s</div>
+                  <div className="text-xs text-text-secondary">Average Execution</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-primary mb-1">95%+</div>
+                  <div className="text-xs text-text-secondary">Success Rate</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-primary mb-1">24/7</div>
+                  <div className="text-xs text-text-secondary">Availability</div>
+                </div>
               </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-primary mb-1">95%+</div>
-                <div className="text-xs text-text-secondary">Success Rate</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-primary mb-1">24/7</div>
-                <div className="text-xs text-text-secondary">Availability</div>
-              </div>
-            </div>
+            </CollapsibleSection>
           </motion.div>
 
           {/* 15 Global BDN Gateways */}
@@ -358,40 +366,46 @@ export default function BDNNetworkSection() {
             transition={{ duration: 0.6 }}
             className="glass-card p-8 border-solana-green/20 hover:border-primary/40 transition-all duration-300 hover:shadow-glow-green"
           >
-            <div className="flex items-start gap-4 mb-4">
-              <div className="p-3 rounded-lg bg-primary/10 text-primary">
-                <Globe className="h-6 w-6" />
-              </div>
-              <h3 className="text-2xl font-bold text-text-primary">
-                15 Proprietary BDN Gateways: Your global speed advantage.
-              </h3>
-            </div>
-            <p className="text-text-secondary text-lg">
-              Our global network of 15 private, optimized Solana gateways (Block Dependent Network) ensures that your
-              transactions are routed through the fastest and most reliable paths, bypassing public congestion.
-            </p>
+            <CollapsibleSection
+              title={
+                <div className="flex items-start gap-4 mb-4">
+                  <div className="p-3 rounded-lg bg-primary/10 text-primary">
+                    <Globe className="h-6 w-6" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-text-primary">
+                    15 Proprietary BDN Gateways: Your global speed advantage.
+                  </h3>
+                </div>
+              }
+              titleClassName="hover:opacity-90 transition-opacity duration-300"
+            >
+              <p className="text-text-secondary text-lg">
+                Our global network of 15 private, optimized Solana gateways (Block Dependent Network) ensures that your
+                transactions are routed through the fastest and most reliable paths, bypassing public congestion.
+              </p>
 
-            {/* Features */}
-            <div className="mt-6 space-y-3">
-              <div className="flex items-center gap-2">
-                <div className="w-4 h-4 rounded-full bg-primary/20 flex items-center justify-center">
-                  <div className="w-2 h-2 rounded-full bg-primary"></div>
+              {/* Features */}
+              <div className="mt-6 space-y-3">
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 rounded-full bg-primary/20 flex items-center justify-center">
+                    <div className="w-2 h-2 rounded-full bg-primary"></div>
+                  </div>
+                  <span className="text-text-secondary">Optimized routing algorithms</span>
                 </div>
-                <span className="text-text-secondary">Optimized routing algorithms</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-4 h-4 rounded-full bg-primary/20 flex items-center justify-center">
-                  <div className="w-2 h-2 rounded-full bg-primary"></div>
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 rounded-full bg-primary/20 flex items-center justify-center">
+                    <div className="w-2 h-2 rounded-full bg-primary"></div>
+                  </div>
+                  <span className="text-text-secondary">Redundant connections for reliability</span>
                 </div>
-                <span className="text-text-secondary">Redundant connections for reliability</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-4 h-4 rounded-full bg-primary/20 flex items-center justify-center">
-                  <div className="w-2 h-2 rounded-full bg-primary"></div>
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 rounded-full bg-primary/20 flex items-center justify-center">
+                    <div className="w-2 h-2 rounded-full bg-primary"></div>
+                  </div>
+                  <span className="text-text-secondary">Strategic global positioning</span>
                 </div>
-                <span className="text-text-secondary">Strategic global positioning</span>
               </div>
-            </div>
+            </CollapsibleSection>
           </motion.div>
         </div>
 
@@ -457,59 +471,65 @@ export default function BDNNetworkSection() {
         </motion.div>
 
         {/* Technical details */}
-        <div className="grid md:grid-cols-3 gap-6 mt-12">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="glass-card p-6"
-          >
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 rounded-md bg-primary/10 text-primary">
-                <Server className="h-5 w-5" />
+        <CollapsibleSection
+          title={<h3 className="text-xl font-bold text-center text-text-primary mb-4">Technical Specifications</h3>}
+          titleClassName="hover:opacity-90 transition-opacity duration-300"
+          defaultOpen={false}
+        >
+          <div className="grid md:grid-cols-3 gap-6">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="glass-card p-6"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-2 rounded-md bg-primary/10 text-primary">
+                  <Server className="h-5 w-5" />
+                </div>
+                <h4 className="font-medium text-text-primary">Dedicated Infrastructure</h4>
               </div>
-              <h4 className="font-medium text-text-primary">Dedicated Infrastructure</h4>
-            </div>
-            <p className="text-text-secondary text-sm">
-              Our BDN network runs on enterprise-grade hardware with dedicated connections to Solana validators.
-            </p>
-          </motion.div>
+              <p className="text-text-secondary text-sm">
+                Our BDN network runs on enterprise-grade hardware with dedicated connections to Solana validators.
+              </p>
+            </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="glass-card p-6"
-          >
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 rounded-md bg-solana-purple/10 text-solana-purple">
-                <Network className="h-5 w-5" />
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="glass-card p-6"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-2 rounded-md bg-solana-purple/10 text-solana-purple">
+                  <Network className="h-5 w-5" />
+                </div>
+                <h4 className="font-medium text-text-primary">Intelligent Routing</h4>
               </div>
-              <h4 className="font-medium text-text-primary">Intelligent Routing</h4>
-            </div>
-            <p className="text-text-secondary text-sm">
-              Our proprietary algorithms dynamically select the optimal path for each transaction based on network
-              conditions.
-            </p>
-          </motion.div>
+              <p className="text-text-secondary text-sm">
+                Our proprietary algorithms dynamically select the optimal path for each transaction based on network
+                conditions.
+              </p>
+            </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="glass-card p-6"
-          >
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 rounded-md bg-primary/10 text-primary">
-                <Zap className="h-5 w-5" />
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="glass-card p-6"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-2 rounded-md bg-primary/10 text-primary">
+                  <Zap className="h-5 w-5" />
+                </div>
+                <h4 className="font-medium text-text-primary">Low-Latency Connections</h4>
               </div>
-              <h4 className="font-medium text-text-primary">Low-Latency Connections</h4>
-            </div>
-            <p className="text-text-secondary text-sm">
-              Our network is optimized for minimal latency, with average ping times under 50ms to Solana validators.
-            </p>
-          </motion.div>
-        </div>
+              <p className="text-text-secondary text-sm">
+                Our network is optimized for minimal latency, with average ping times under 50ms to Solana validators.
+              </p>
+            </motion.div>
+          </div>
+        </CollapsibleSection>
       </div>
     </section>
   )

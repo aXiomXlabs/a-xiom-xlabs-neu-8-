@@ -5,6 +5,7 @@ import { Rocket, Zap, TrendingUp, ArrowRight } from "lucide-react"
 import { motion } from "framer-motion"
 import Image from "next/image"
 import WaitlistButton from "./WaitlistButton"
+import CollapsibleSection from "./CollapsibleSection"
 
 export default function Hero() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -114,27 +115,84 @@ export default function Hero() {
               </span>
             </motion.div>
 
-            <motion.h1
-              id="hero-heading"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6"
-              itemProp="headline"
+            <CollapsibleSection
+              title={
+                <h1
+                  id="hero-heading"
+                  className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6"
+                  itemProp="headline"
+                >
+                  Dominate Solana Meme Coins with <span className="text-gradient font-extrabold">Rust Rocket</span>
+                </h1>
+              }
+              titleClassName="hover:opacity-90 transition-opacity duration-300"
+              defaultOpen={false}
             >
-              Dominate Solana Meme Coins with <span className="text-gradient font-extrabold">Rust Rocket</span>
-            </motion.h1>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="text-lg text-text-secondary mb-6"
+                itemProp="description"
+              >
+                The #1 Solana sniper bot with same-block execution and intelligent copy trading. Perfect for pump.fun
+                sniping and professional Solana trading.
+              </motion.p>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-lg text-text-secondary mb-6"
-              itemProp="description"
-            >
-              The #1 Solana sniper bot with same-block execution and intelligent copy trading. Perfect for pump.fun
-              sniping and professional Solana trading.
-            </motion.p>
+              {/* Feature icons */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+                className="mt-8 grid grid-cols-3 gap-6"
+              >
+                <div className="flex flex-col items-center text-center">
+                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-2">
+                    <Zap className="w-6 h-6 text-primary" aria-hidden="true" />
+                  </div>
+                  <span className="text-text-primary font-medium">Same-Block Execution</span>
+                </div>
+
+                <div className="flex flex-col items-center text-center">
+                  <div className="w-12 h-12 rounded-full bg-solana-purple/10 flex items-center justify-center mb-2">
+                    <TrendingUp className="w-6 h-6 text-solana-purple" aria-hidden="true" />
+                  </div>
+                  <span className="text-text-primary font-medium">Copy Trading</span>
+                </div>
+
+                <div className="flex flex-col items-center text-center">
+                  <div className="w-12 h-12 rounded-full bg-solana-green/10 flex items-center justify-center mb-2">
+                    <svg
+                      className="w-6 h-6 text-solana-green"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M12 18C15.3137 18 18 15.3137 18 12C18 8.68629 15.3137 6 12 6C8.68629 6 6 8.68629 6 12C6 15.3137 8.68629 18 12 18Z"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M12 14C13.1046 14 14 13.1046 14 12C14 10.8954 13.1046 10 12 10C10.8954 10 10 10.8954 10 12C10 13.1046 10.8954 14 12 14Z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                  </div>
+                  <span className="text-text-primary font-medium">Solana Optimized</span>
+                </div>
+              </motion.div>
+            </CollapsibleSection>
 
             {/* CTA Button */}
             <motion.div
@@ -154,59 +212,6 @@ export default function Hero() {
                   aria-hidden="true"
                 />
               </WaitlistButton>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="mt-8 grid grid-cols-3 gap-6"
-            >
-              <div className="flex flex-col items-center text-center">
-                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-2">
-                  <Zap className="w-6 h-6 text-primary" aria-hidden="true" />
-                </div>
-                <span className="text-text-primary font-medium">Same-Block Execution</span>
-              </div>
-
-              <div className="flex flex-col items-center text-center">
-                <div className="w-12 h-12 rounded-full bg-solana-purple/10 flex items-center justify-center mb-2">
-                  <TrendingUp className="w-6 h-6 text-solana-purple" aria-hidden="true" />
-                </div>
-                <span className="text-text-primary font-medium">Copy Trading</span>
-              </div>
-
-              <div className="flex flex-col items-center text-center">
-                <div className="w-12 h-12 rounded-full bg-solana-green/10 flex items-center justify-center mb-2">
-                  <svg
-                    className="w-6 h-6 text-solana-green"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-                  >
-                    <path
-                      d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M12 18C15.3137 18 18 15.3137 18 12C18 8.68629 15.3137 6 12 6C8.68629 6 6 8.68629 6 12C6 15.3137 8.68629 18 12 18Z"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M12 14C13.1046 14 14 13.1046 14 12C14 10.8954 13.1046 10 12 10C10.8954 10 10 10.8954 10 12C10 13.1046 10.8954 14 12 14Z"
-                      fill="currentColor"
-                    />
-                  </svg>
-                </div>
-                <span className="text-text-primary font-medium">Solana Optimized</span>
-              </div>
             </motion.div>
           </div>
 

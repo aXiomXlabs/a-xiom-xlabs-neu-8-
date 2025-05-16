@@ -3,6 +3,8 @@
 import { useState, useRef } from "react"
 import { motion, useInView, AnimatePresence } from "framer-motion"
 import { ChevronDown } from "lucide-react"
+import CollapsibleSection from "./CollapsibleSection"
+import { event, ANALYTICS_EVENTS } from "@/lib/analytics"
 
 interface FAQItem {
   question: string
@@ -54,13 +56,10 @@ export default function FAQSection() {
 
   const toggleFAQ = (index: number) => {
     // Track FAQ interaction
-    if (typeof window !== "undefined" && "gtag" in window) {
-      // @ts-ignore - gtag is not typed
-      window.gtag("event", "faq_interaction", {
-        event_category: "engagement",
-        event_label: `faq_${index + 1}_${activeIndex === index ? "close" : "open"}`,
-      })
-    }
+    event(ANALYTICS_EVENTS.FAQ_INTERACTION, {
+      event_category: "engagement",
+      event_label: `faq_${index + 1}_${activeIndex === index ? "close" : "open"}`,
+    })
 
     setActiveIndex(activeIndex === index ? null : index)
   }
@@ -75,26 +74,27 @@ export default function FAQSection() {
       itemType="https://schema.org/FAQPage"
     >
       <div className="container-custom">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.5 }}
-          className="text-center max-w-4xl mx-auto mb-16"
+        <CollapsibleSection
+          title={
+            <>
+              <div className="inline-flex items-center px-4 py-2 rounded-full bg-background-tertiary text-text-secondary text-sm font-medium mb-4">
+                <span className="w-2 h-2 rounded-full bg-primary mr-2" aria-hidden="true"></span>
+                FAQ
+              </div>
+
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-text-primary" id="faq-heading">
+                Frequently Asked <span className="text-gradient">Questions</span>
+              </h2>
+            </>
+          }
+          defaultOpen={false}
+          titleClassName="hover:opacity-90 transition-opacity duration-300 flex flex-col items-center text-center"
         >
-          <div className="inline-flex items-center px-4 py-2 rounded-full bg-background-tertiary text-text-secondary text-sm font-medium mb-4">
-            <span className="w-2 h-2 rounded-full bg-primary mr-2" aria-hidden="true"></span>
-            FAQ
-          </div>
-
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-text-primary" id="faq-heading">
-            Frequently Asked <span className="text-gradient">Questions</span>
-          </h2>
-
           <p className="text-text-secondary text-lg">
             Here you'll find answers to the most common questions about Rust Rocket. If you have any other questions,
             don't hesitate to contact us via Telegram.
           </p>
-        </motion.div>
+        </CollapsibleSection>
 
         <div className="max-w-3xl mx-auto">
           {faqs.map((faq, index) => (

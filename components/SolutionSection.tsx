@@ -3,9 +3,9 @@
 import type React from "react"
 
 import { useRef } from "react"
-import Link from "next/link"
-import { ArrowRight, Rocket, BarChart3, Shield } from "lucide-react"
+import { Rocket, BarChart3, Shield } from "lucide-react"
 import { motion, useInView } from "framer-motion"
+import CollapsibleSection from "./CollapsibleSection"
 
 interface FeatureCardProps {
   icon: React.ReactNode
@@ -84,62 +84,77 @@ export default function SolutionSection() {
         {/* Gesamtes Grid-Layout auf eine Spalte geändert */}
         <div className="max-w-3xl mx-auto">
           {/* Text content */}
-          <div className="flex flex-col">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.5 }}
-              className="mb-8"
+          <CollapsibleSection
+            title={
+              <>
+                <div className="inline-flex items-center px-4 py-2 rounded-full bg-background-tertiary text-text-secondary text-sm font-medium mb-4">
+                  <span className="w-2 h-2 rounded-full bg-solana-green mr-2"></span>
+                  The Solution
+                </div>
+
+                <h2 className="text-3xl md:text-4xl font-bold text-text-primary">
+                  <span className="text-primary">Rust Rocket</span>: Precision, Speed, and Strategy – Straight to Your
+                  Telegram
+                </h2>
+              </>
+            }
+            defaultOpen={false}
+            titleClassName="hover:opacity-90 transition-opacity duration-300 flex flex-col items-start"
+          >
+            <p className="text-text-secondary text-lg mb-6">
+              We built Rust Rocket to level the playing field for ambitious traders like you. Get the edge you need to
+              navigate the Solana meme coin market successfully.
+            </p>
+          </CollapsibleSection>
+
+          <div className="space-y-4">
+            <CollapsibleSection
+              title={
+                <div className="flex items-start gap-4">
+                  <div className="p-3 rounded-lg bg-primary/10 text-primary">
+                    <Rocket className="h-6 w-6" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-text-primary">Same-Block Execution</h3>
+                </div>
+              }
+              titleClassName="hover:bg-background-tertiary/30 rounded-lg p-2 transition-all duration-300"
             >
-              <div className="inline-flex items-center px-4 py-2 rounded-full bg-background-tertiary text-text-secondary text-sm font-medium mb-4">
-                <span className="w-2 h-2 rounded-full bg-solana-green mr-2"></span>
-                The Solution
-              </div>
-
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-text-primary">
-                <span className="text-primary">Rust Rocket</span>: Precision, Speed, and Strategy – Straight to Your
-                Telegram
-              </h2>
-
-              <p className="text-text-secondary text-lg mb-6">
-                We built Rust Rocket to level the playing field for ambitious traders like you. Get the edge you need to
-                navigate the Solana meme coin market successfully.
+              <p className="text-text-secondary ml-14">
+                Execute trades in the exact same Solana block as the original event for maximum impact.
               </p>
+            </CollapsibleSection>
 
-              <Link
-                href="#waitlist"
-                className="btn-primary text-lg px-8 py-4 rounded-lg flex items-center gap-2 group shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all duration-300 hover:translate-y-[-2px] w-fit"
-              >
-                Get Started Now
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-              </Link>
-            </motion.div>
+            <CollapsibleSection
+              title={
+                <div className="flex items-start gap-4">
+                  <div className="p-3 rounded-lg bg-solana-purple/10 text-solana-purple">
+                    <BarChart3 className="h-6 w-6" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-text-primary">Intelligent Copy Trading</h3>
+                </div>
+              }
+              titleClassName="hover:bg-background-tertiary/30 rounded-lg p-2 transition-all duration-300"
+            >
+              <p className="text-text-secondary ml-14">
+                Automatically identify and copy the most successful traders on Solana.
+              </p>
+            </CollapsibleSection>
 
-            <div className="space-y-4">
-              <FeatureCard
-                icon={<Rocket className="h-6 w-6" />}
-                title="Same-Block Execution"
-                description="Execute trades in the exact same Solana block as the original event for maximum impact."
-                color="border-primary/30"
-                index={0}
-              />
-
-              <FeatureCard
-                icon={<BarChart3 className="h-6 w-6" />}
-                title="Intelligent Copy Trading"
-                description="Automatically identify and copy the most successful traders on Solana."
-                color="border-solana-purple/30"
-                index={1}
-              />
-
-              <FeatureCard
-                icon={<Shield className="h-6 w-6" />}
-                title="15 Proprietary BDN Gateways"
-                description="Our global network ensures your transactions are routed via the fastest, most reliable paths."
-                color="border-solana-green/30"
-                index={2}
-              />
-            </div>
+            <CollapsibleSection
+              title={
+                <div className="flex items-start gap-4">
+                  <div className="p-3 rounded-lg bg-solana-green/10 text-solana-green">
+                    <Shield className="h-6 w-6" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-text-primary">15 Proprietary BDN Gateways</h3>
+                </div>
+              }
+              titleClassName="hover:bg-background-tertiary/30 rounded-lg p-2 transition-all duration-300"
+            >
+              <p className="text-text-secondary ml-14">
+                Our global network ensures your transactions are routed via the fastest, most reliable paths.
+              </p>
+            </CollapsibleSection>
           </div>
         </div>
       </div>

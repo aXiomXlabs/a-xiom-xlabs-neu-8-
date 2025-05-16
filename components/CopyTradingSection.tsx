@@ -5,6 +5,7 @@ import Image from "next/image"
 import { Search, Zap, TrendingUp, ArrowRight } from "lucide-react"
 import { motion, useInView } from "framer-motion"
 import WaitlistButton from "./WaitlistButton"
+import CollapsibleSection from "./CollapsibleSection"
 
 export default function CopyTradingSection() {
   const sectionRef = useRef(null)
@@ -26,31 +27,32 @@ export default function CopyTradingSection() {
       </div>
 
       <div className="container-custom relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.5 }}
-          className="text-center max-w-4xl mx-auto mb-16"
+        <CollapsibleSection
+          title={
+            <>
+              <div className="inline-flex items-center px-4 py-2 rounded-full bg-background-tertiary text-text-secondary text-sm font-medium mb-4">
+                <span className="w-2 h-2 rounded-full bg-solana-purple mr-2" aria-hidden="true"></span>
+                Copy Trading
+              </div>
+
+              <h2
+                className="text-3xl md:text-4xl font-bold mb-6 text-text-primary"
+                id="copy-trading-heading"
+                itemProp="headline"
+              >
+                Stop Guessing, Start Copying: <span className="text-gradient">Intelligent Copy Trading</span>
+              </h2>
+            </>
+          }
+          defaultOpen={false}
+          titleClassName="hover:opacity-90 transition-opacity duration-300 flex flex-col items-center text-center"
         >
-          <div className="inline-flex items-center px-4 py-2 rounded-full bg-background-tertiary text-text-secondary text-sm font-medium mb-4">
-            <span className="w-2 h-2 rounded-full bg-solana-purple mr-2" aria-hidden="true"></span>
-            Copy Trading
-          </div>
-
-          <h2
-            className="text-3xl md:text-4xl font-bold mb-6 text-text-primary"
-            id="copy-trading-heading"
-            itemProp="headline"
-          >
-            Stop Guessing, Start Copying: <span className="text-gradient">Intelligent Copy Trading</span>
-          </h2>
-
           <p className="text-text-secondary text-lg" itemProp="description">
             Why spend hours analyzing wallets when Rust Rocket can find top performers and
             <span className="text-primary font-semibold"> automatically</span> execute their trades for you,
             <span className="text-primary font-semibold"> lightning-fast</span>?
           </p>
-        </motion.div>
+        </CollapsibleSection>
 
         <div className="grid md:grid-cols-2 gap-12 items-center">
           {/* Left Column - Visual Element */}
@@ -60,72 +62,79 @@ export default function CopyTradingSection() {
             transition={{ duration: 0.6 }}
             className="glass-card p-8 border-solana-purple/20 hover:border-solana-purple/40 transition-all duration-500"
           >
-            <h3 className="text-xl font-semibold mb-8 text-center text-text-primary">How Copy Trading Works</h3>
+            <CollapsibleSection
+              title={<h3 className="text-xl font-semibold text-center text-text-primary">How Copy Trading Works</h3>}
+              titleClassName="hover:opacity-90 transition-opacity duration-300"
+              defaultOpen={false}
+            >
+              <div className="space-y-8 mt-4">
+                {/* Step 1 */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                  transition={{ duration: 0.5, delay: 0.1 }}
+                  className="flex items-center gap-4"
+                >
+                  <div className="flex-shrink-0 w-12 h-12 rounded-full bg-solana-purple/20 flex items-center justify-center">
+                    <Search className="w-6 h-6 text-solana-purple" aria-hidden="true" />
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-text-primary">Pro Wallet Identification</h4>
+                    <p className="text-text-secondary text-sm">
+                      Our system identifies and tracks top-performing wallets in real-time
+                    </p>
+                  </div>
+                </motion.div>
 
-            <div className="space-y-8">
-              {/* Step 1 */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                className="flex items-center gap-4"
-              >
-                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-solana-purple/20 flex items-center justify-center">
-                  <Search className="w-6 h-6 text-solana-purple" aria-hidden="true" />
-                </div>
-                <div>
-                  <h4 className="font-medium text-text-primary">Pro Wallet Identification</h4>
-                  <p className="text-text-secondary text-sm">
-                    Our system identifies and tracks top-performing wallets in real-time
-                  </p>
-                </div>
-              </motion.div>
+                {/* Connector Line */}
+                <div
+                  className="w-0.5 h-8 bg-gradient-to-b from-solana-purple to-primary mx-auto"
+                  aria-hidden="true"
+                ></div>
 
-              {/* Connector Line */}
-              <div
-                className="w-0.5 h-8 bg-gradient-to-b from-solana-purple to-primary mx-auto"
-                aria-hidden="true"
-              ></div>
+                {/* Step 2 */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                  className="flex items-center gap-4"
+                >
+                  <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
+                    <Zap className="w-6 h-6 text-primary" aria-hidden="true" />
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-text-primary">Instant Analysis & Execution</h4>
+                    <p className="text-text-secondary text-sm">
+                      Our algorithm instantly analyzes and executes the same trades with precision
+                    </p>
+                  </div>
+                </motion.div>
 
-              {/* Step 2 */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="flex items-center gap-4"
-              >
-                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
-                  <Zap className="w-6 h-6 text-primary" aria-hidden="true" />
-                </div>
-                <div>
-                  <h4 className="font-medium text-text-primary">Instant Analysis & Execution</h4>
-                  <p className="text-text-secondary text-sm">
-                    Our algorithm instantly analyzes and executes the same trades with precision
-                  </p>
-                </div>
-              </motion.div>
+                {/* Connector Line */}
+                <div
+                  className="w-0.5 h-8 bg-gradient-to-b from-primary to-solana-green mx-auto"
+                  aria-hidden="true"
+                ></div>
 
-              {/* Connector Line */}
-              <div className="w-0.5 h-8 bg-gradient-to-b from-primary to-solana-green mx-auto" aria-hidden="true"></div>
-
-              {/* Step 3 */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                className="flex items-center gap-4"
-              >
-                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-solana-green/20 flex items-center justify-center">
-                  <TrendingUp className="w-6 h-6 text-solana-green" aria-hidden="true" />
-                </div>
-                <div>
-                  <h4 className="font-medium text-text-primary">Profit Generation</h4>
-                  <p className="text-text-secondary text-sm">
-                    You benefit from professional trading strategies without the work
-                  </p>
-                </div>
-              </motion.div>
-            </div>
+                {/* Step 3 */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                  transition={{ duration: 0.5, delay: 0.3 }}
+                  className="flex items-center gap-4"
+                >
+                  <div className="flex-shrink-0 w-12 h-12 rounded-full bg-solana-green/20 flex items-center justify-center">
+                    <TrendingUp className="w-6 h-6 text-solana-green" aria-hidden="true" />
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-text-primary">Profit Generation</h4>
+                    <p className="text-text-secondary text-sm">
+                      You benefit from professional trading strategies without the work
+                    </p>
+                  </div>
+                </motion.div>
+              </div>
+            </CollapsibleSection>
 
             {/* Dashboard Preview */}
             <motion.div
@@ -162,147 +171,126 @@ export default function CopyTradingSection() {
             transition={{ duration: 0.6 }}
             className="space-y-6"
           >
-            <div className="space-y-4">
-              <p className="text-text-primary text-lg">
-                Other bots like Maestro, Bonk Bot, or Trojan might offer sniping, but only Rust Rocket empowers you with
-                true Copy Trading – your definitive advantage.
-              </p>
-
-              <p className="text-text-secondary">
-                Our system identifies wallets with proven success and automatically executes their trades for you with
-                lightning speed.
-              </p>
-            </div>
-
             {/* Feature cards */}
             <div className="space-y-4 mt-8">
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-                transition={{ duration: 0.4, delay: 0.1 }}
-                className="glass-card p-4 border-solana-purple/20 hover:border-solana-purple/40 transition-all duration-300"
-              >
-                <div className="flex items-start gap-3">
-                  <div className="p-2 rounded-md bg-solana-purple/10 text-solana-purple">
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      aria-hidden="true"
-                    >
-                      <path
-                        d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                      <path
-                        d="M12 6V12L16 14"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </div>
-                  <div>
+              <CollapsibleSection
+                title={
+                  <div className="flex items-start gap-3">
+                    <div className="p-2 rounded-md bg-solana-purple/10 text-solana-purple">
+                      <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                        <path
+                          d="M12 6V12L16 14"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </div>
                     <h4 className="font-medium text-text-primary">Real-Time Tracking</h4>
-                    <p className="text-text-secondary text-sm">
-                      Monitor top wallets 24/7 without missing a single trade
-                    </p>
                   </div>
-                </div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-                transition={{ duration: 0.4, delay: 0.2 }}
-                className="glass-card p-4 border-primary/20 hover:border-primary/40 transition-all duration-300"
+                }
+                titleClassName="hover:bg-background-tertiary/30 rounded-md p-2 transition-all duration-300"
               >
-                <div className="flex items-start gap-3">
-                  <div className="p-2 rounded-md bg-primary/10 text-primary">
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      aria-hidden="true"
-                    >
-                      <path
-                        d="M22 12H18L15 21L9 3L6 12H2"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </div>
-                  <div>
+                <p className="text-text-secondary text-sm ml-10">
+                  Monitor top wallets 24/7 without missing a single trade
+                </p>
+              </CollapsibleSection>
+
+              <CollapsibleSection
+                title={
+                  <div className="flex items-start gap-3">
+                    <div className="p-2 rounded-md bg-primary/10 text-primary">
+                      <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M22 12H18L15 21L9 3L6 12H2"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </div>
                     <h4 className="font-medium text-text-primary">Performance Analytics</h4>
-                    <p className="text-text-secondary text-sm">
-                      Detailed metrics on each wallet's trading history and success rate
-                    </p>
                   </div>
-                </div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-                transition={{ duration: 0.4, delay: 0.3 }}
-                className="glass-card p-4 border-solana-green/20 hover:border-solana-green/40 transition-all duration-300"
+                }
+                titleClassName="hover:bg-background-tertiary/30 rounded-md p-2 transition-all duration-300"
               >
-                <div className="flex items-start gap-3">
-                  <div className="p-2 rounded-md bg-solana-green/10 text-solana-green">
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      aria-hidden="true"
-                    >
-                      <path
-                        d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                      <path
-                        d="M8 14C8 14 9.5 16 12 16C14.5 16 16 14 16 14"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                      <path
-                        d="M9 9H9.01"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                      <path
-                        d="M15 9H15.01"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </div>
-                  <div>
+                <p className="text-text-secondary text-sm ml-10">
+                  Detailed metrics on each wallet's trading history and success rate
+                </p>
+              </CollapsibleSection>
+
+              <CollapsibleSection
+                title={
+                  <div className="flex items-start gap-3">
+                    <div className="p-2 rounded-md bg-solana-green/10 text-solana-green">
+                      <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                        <path
+                          d="M8 14C8 14 9.5 16 12 16C14.5 16 16 14 16 14"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                        <path
+                          d="M9 9H9.01"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                        <path
+                          d="M15 9H15.01"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </div>
                     <h4 className="font-medium text-text-primary">Customizable Parameters</h4>
-                    <p className="text-text-secondary text-sm">Set your own risk tolerance and trading preferences</p>
                   </div>
-                </div>
-              </motion.div>
+                }
+                titleClassName="hover:bg-background-tertiary/30 rounded-md p-2 transition-all duration-300"
+              >
+                <p className="text-text-secondary text-sm ml-10">Set your own risk tolerance and trading preferences</p>
+              </CollapsibleSection>
             </div>
 
             {/* Testimonial */}

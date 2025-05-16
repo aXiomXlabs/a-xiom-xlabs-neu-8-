@@ -2,6 +2,7 @@
 
 import { useRef } from "react"
 import { motion, useInView } from "framer-motion"
+import CollapsibleSection from "./CollapsibleSection"
 
 export default function VisionSection() {
   const sectionRef = useRef(null)
@@ -21,16 +22,22 @@ export default function VisionSection() {
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-text-primary">
-            More Than Just a Bot: Our Mission for Solana Traders.
-          </h2>
-
-          <p className="text-text-secondary text-lg md:text-xl leading-relaxed">
-            We are traders and developers fascinated by the potential of Solana.{" "}
-            <span className="text-primary">Rust Rocket</span> is our contribution to making advanced trading technology
-            accessible and fair for a wider community. We are committed to continuously evolving Rust Rocket – be part
-            of the journey!
-          </p>
+          <CollapsibleSection
+            title={
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-text-primary">
+                More Than Just a Bot: Our Mission for Solana Traders.
+              </h2>
+            }
+            titleClassName="hover:opacity-90 transition-opacity duration-300"
+            defaultOpen={false}
+          >
+            <p className="text-text-secondary text-lg md:text-xl leading-relaxed">
+              We are traders and developers fascinated by the potential of Solana.{" "}
+              <span className="text-primary">Rust Rocket</span> is our contribution to making advanced trading
+              technology accessible and fair for a wider community. We are committed to continuously evolving Rust
+              Rocket – be part of the journey!
+            </p>
+          </CollapsibleSection>
         </motion.div>
       </div>
 
